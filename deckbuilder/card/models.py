@@ -21,3 +21,11 @@ class Card(models.Model):
     rarity = models.CharField(max_length=20, choices=RARITIES)
     card_text = models.CharField(max_length=300)
     card_type = models.CharField(max_length=20)
+
+
+class Set(models.Model):
+    """Class for set model."""
+
+    name = models.CharField(max_length=50)
+    cards = models.ForeignKey(Card, related_name='from_set',
+                              blank=True, null=True)
