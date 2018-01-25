@@ -1,5 +1,6 @@
 """Model of a single magic card."""
 from django.db import models
+from multiselectfield import MultiSelectField
 
 
 class Card(models.Model):
@@ -11,7 +12,7 @@ class Card(models.Model):
     RARITIES = (['M', 'Mythic-Rare'], ['R', 'Rare'],
                 ['U', 'Uncommon'], ['C', 'Common'])
     cmc = models.CharField(max_length=20)
-    colors = models.CharField(max_length=20, choices=COLORS)
+    colors = MultiSelectField(max_length=20, choices=COLORS)
     image = models.ImageField(upload_to='images')
     loyalty = models.IntegerField(null=True, blank=True)
     mana_Cost = models.CharField(max_length=20)
