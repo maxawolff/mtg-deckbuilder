@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'deckbuilder',
     'card',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
