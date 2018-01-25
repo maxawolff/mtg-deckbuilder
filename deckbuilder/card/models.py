@@ -14,7 +14,7 @@ class Card(models.Model):
     colors = models.CharField(max_length=20, choices=COLORS)
     image = models.ImageField(upload_to='images')
     loyalty = models.IntegerField(null=True, blank=True)
-    mana_Cost = models.CarField(max_length=20)
+    mana_Cost = models.CharField(max_length=20)
     name = models.CharField(max_length=30)
     power = models.IntegerField(null=True, blank=True)
     toughness = models.IntegerField(null=True, blank=True)
@@ -27,5 +27,5 @@ class Set(models.Model):
     """Class for set model."""
 
     name = models.CharField(max_length=50)
-    cards = models.ForeignKey(Card, related_name='from_set',
-                              blank=True, null=True)
+    cards = models.ForeignKey(Card, on_delete=models.CASCADE,
+                              related_name='from_set', blank=True, null=True)
