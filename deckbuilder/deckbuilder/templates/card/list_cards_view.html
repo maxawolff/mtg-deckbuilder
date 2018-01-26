@@ -1,0 +1,7 @@
+{% extends "deckbuilder/base.html"%}
+
+{% block content %}
+    {% for card in object_list%}
+    <img src="{{ card.image}}">
+    {% endfor %}
+{% endblock %}
