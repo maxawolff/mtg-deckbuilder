@@ -7,12 +7,15 @@ def run(*args):
     if args:
         pass
     else:
+        all_cards = Card.objects.all()
+        all_cards.delete()
+        import pdb; pdb.set_trace()
         sets = Set.objects.all()
         if not sets:
             return
         cur_set = sets[0]
-        rivals_cards = SourceCard.where(set='rix')
-        rivals_cards = rivals_cards.all()
+        rivals = SourceCard.where(set='rix')
+        rivals_cards = rivals.all()
         for card in rivals_cards:
             new_card = Card.objects.create(name=card.name,
                                            colors=card.colors,

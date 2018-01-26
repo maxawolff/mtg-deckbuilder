@@ -21,4 +21,5 @@ class ListCards(ListView):
         """."""
         context = super(ListCards, self).get_context_data(**kwargs)
         # import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         return context
