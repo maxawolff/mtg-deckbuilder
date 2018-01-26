@@ -1,5 +1,5 @@
 """."""
-from card.models import Card
+from card import Card
 
 
 def run():

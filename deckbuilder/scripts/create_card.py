@@ -20,7 +20,9 @@ def run(*args):
                                            image=card.image_url,
                                            mana_cost=card.mana_cost,
                                            rarity=card.rarity,
-                                           card_type=card.type,
+                                           card_type=card.types,
+                                           card_subtypes=card.subtypes,
+                                           card_text=card.text
                                            )
             if card.power:
                 new_card.power = card.power
