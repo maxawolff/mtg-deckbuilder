@@ -2,6 +2,7 @@ from mtgsdk import Card as SourceCard
 from mtgsdk import Set as sourceSet
 from card.models import Card, Set
 
+
 def run(*args):
     """Add a card to the database from the mtgsdk."""
     if args:
@@ -9,7 +10,6 @@ def run(*args):
     else:
         all_cards = Card.objects.all()
         all_cards.delete()
-        import pdb; pdb.set_trace()
         sets = Set.objects.all()
         if not sets:
             return
@@ -34,3 +34,4 @@ def run(*args):
             if card.loyalty:
                 new_card.loyalty = card.loyalty
             new_card.save()
+            cur_set.card_set.add(new_card)

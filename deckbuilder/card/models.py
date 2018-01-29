@@ -3,6 +3,16 @@ from django.db import models
 from multiselectfield import MultiSelectField
 
 
+class Set(models.Model):
+    """Class for set model."""
+
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        """Change how model is displayed when printed."""
+        return self.name
+
+
 class Card(models.Model):
     """Class for card model."""
 
@@ -23,18 +33,8 @@ class Card(models.Model):
     card_text = models.CharField(max_length=600, blank=True, null=True)
     card_type = models.CharField(max_length=50)
     card_subtypes = models.CharField(max_length=50, blank=True, null=True)
-
-    def __str__(self):
-        """Change how model is displayed when printed."""
-        return self.name
-
-
-class Set(models.Model):
-    """Class for set model."""
-
-    name = models.CharField(max_length=50)
-    cards = models.ForeignKey(Card, on_delete=models.CASCADE,
-                              related_name='from_set', blank=True, null=True)
+    from_set = models.ForeignKey(Set, on_delete=models.CASCADE,
+                                 blank=True, null=True)
 
     def __str__(self):
         """Change how model is displayed when printed."""
