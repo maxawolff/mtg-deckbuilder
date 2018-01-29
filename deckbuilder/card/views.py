@@ -1,6 +1,6 @@
 """Views for cards, as well as generating from sdk."""
 from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic import CreateView
 from card.models import Card
 
@@ -20,6 +20,20 @@ class ListCards(ListView):
     def get_context_data(self, **kwargs):
         """."""
         context = super(ListCards, self).get_context_data(**kwargs)
+        # import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
+        return context
+
+
+class CardDetail(DetailView):
+    """Show detail for one card."""
+
+    template_name = 'card/card_detail_view.html'
+    model = Card
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(CardDetail, self).get_context_data(**kwargs)
         # import pdb; pdb.set_trace()
         # import pdb; pdb.set_trace()
         return context

@@ -1,6 +1,7 @@
 """Model of a single magic card."""
 from django.db import models
 from multiselectfield import MultiSelectField
+from django.utils.text import slugify
 
 
 class Set(models.Model):
@@ -35,6 +36,22 @@ class Card(models.Model):
     card_subtypes = models.CharField(max_length=50, blank=True, null=True)
     from_set = models.ForeignKey(Set, on_delete=models.CASCADE,
                                  blank=True, null=True)
+    slug = models.SlugField(max_length=40, unique=True, blank=True, null=True)
+
+    def _get_unique_slug(self):
+        slug = slugify(self.name)
+        unique_slug = slug
+        num = 1
+        while Card.objects.filter(slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
+
+    def save(self, *args, **kwargs):
+        """Overwrite save to generate slug."""
+        if not self.slug:
+            self.slug = self._get_unique_slug()
+        super().save()
 
     def __str__(self):
         """Change how model is displayed when printed."""
