@@ -6,7 +6,30 @@ from card.models import Card, Set
 def run(*args):
     """Add a card to the database from the mtgsdk."""
     if args:
-        pass
+        # import pdb; pdb.set_trace()
+        set_str = args[0]
+        cur_set = ''
+        try:
+            cur_set = sourceSet.find(set_str)
+        except:
+            print('Set id was invalid, please check id')
+            return
+        set_in_db = False
+        all_sets = Set.objects.all()
+        selected_set = ''
+        for one_set in all_sets:
+            if cur_set.name == one_set.name:
+                set_in_db = True
+                selected_set = one_set
+        if set_in_db:
+            cards_in_set = selected_set.card_set.all()
+            cards_in_set.delete()
+            gen_set(set_str, selected_set)
+        else:
+            new_set = Set(name=cur_set.name)
+            new_set.save()
+            gen_set(set_str, new_set)
+
     else:
         all_cards = Card.objects.all()
         all_cards.delete()
@@ -35,3 +58,28 @@ def run(*args):
                 new_card.loyalty = card.loyalty
             new_card.save()
             cur_set.card_set.add(new_card)
+
+
+def gen_set(set_id, set_obj):
+    """Given a set id, generate card objects and add to db."""
+    raw_cards = SourceCard.where(set=set_id)
+    cards = raw_cards.all()
+    for card in cards:
+        new_card = Card.objects.create(name=card.name,
+                                       colors=card.colors,
+                                       cmc=card.cmc,
+                                       image=card.image_url,
+                                       mana_cost=card.mana_cost,
+                                       rarity=card.rarity,
+                                       card_type=card.types,
+                                       card_subtypes=card.subtypes,
+                                       card_text=card.text
+                                       )
+        if card.power:
+            new_card.power = card.power
+        if card.toughness:
+            new_card.toughness = card.toughness
+        if card.loyalty:
+            new_card.loyalty = card.loyalty
+        new_card.save()
+        set_obj.card_set.add(new_card)
