@@ -1,0 +1,27 @@
+{% extends "deckbuilder/base.html"%}
+
+{% block content %}
+    <img src="{{ card.image}}">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{ card.name }}</h4>
+            <p class="card-text">Text - {{ card.card_text }}</p>
+            <p class="card-text">Color - {{ card.colors }}</p>
+            <p class="card-text">Mana Cost - {{ card.mana_cost }}</p>
+            <p class="card-text">Rarity - {{ card.rarity }}</p>
+            <p class="card-text">Type - {{ card.card_type }}</p>
+            {% if card.card_subtypes %}
+            <p class="card-text">Subtype(s) - {{ card.card_subtypes }}</p>
+            {% endif %}
+            {% if card.power %}
+                <p class="card-text">Power - {{ card.power }}</p>
+            {% endif %}
+            {% if card.toughness %}
+                <p class="card-text">Toughness - {{ card.toughness }}</p>
+            {% endif %}
+            {% if card.loyalty %}
+                <p class="card-text">Loyalty - {{ card.loyalty }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

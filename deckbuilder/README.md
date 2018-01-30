@@ -1,0 +1,1 @@
+shoutout to Fazzle Rabby for the auto slug population - https://fazle.me/auto-generating-unique-slug-in-django/
