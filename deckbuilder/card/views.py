@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic import CreateView
-from card.models import Card
+from card.models import Card, Set
 
 
 class TestAddView(TemplateView):
@@ -43,11 +43,10 @@ class CardsBySet(DetailView):
     """Show all cards of a given set."""
 
     template_name = 'card/list_cards_view.html'
-    model = Card
+    model = Set
 
     def get_context_data(self, **kwargs):
         """."""
-        context = super(CardDetail, self).get_context_data(**kwargs)
-        import pdb; pdb.set_trace()
+        context = super(CardsBySet, self).get_context_data(**kwargs)
         # import pdb; pdb.set_trace()
         return context
