@@ -1,6 +1,7 @@
 from mtgsdk import Card as SourceCard
 from mtgsdk import Set as sourceSet
 from card.models import Card, Set
+from django.utils.text import slugify
 
 
 def run(*args):
@@ -26,7 +27,9 @@ def run(*args):
             cards_in_set.delete()
             gen_set(set_str, selected_set)
         else:
-            new_set = Set(name=cur_set.name)
+            new_set = Set(name=cur_set.name,
+                          set_id=cur_set.code,
+                          slug=slugify(cur_set.code))
             new_set.save()
             gen_set(set_str, new_set)
 

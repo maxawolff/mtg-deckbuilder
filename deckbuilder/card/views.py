@@ -37,3 +37,17 @@ class CardDetail(DetailView):
         # import pdb; pdb.set_trace()
         # import pdb; pdb.set_trace()
         return context
+
+
+class CardsBySet(DetailView):
+    """Show all cards of a given set."""
+
+    template_name = 'card/list_cards_view.html'
+    model = Card
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(CardDetail, self).get_context_data(**kwargs)
+        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
+        return context
