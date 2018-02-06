@@ -1,7 +1,7 @@
 {% extends "deckbuilder/base.html"%}
 
 {% block content %}
-    {% for card in object_list%}
+    {% for card in cards %}
     <a href="{% url 'card_detail' slug=card.slug %}"><img src="{{ card.image }}"></a>
     {% endfor %}
 {% endblock %}
