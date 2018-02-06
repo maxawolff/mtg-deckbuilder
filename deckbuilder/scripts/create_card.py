@@ -61,6 +61,8 @@ def run(*args):
                 new_card.loyalty = card.loyalty
             new_card.save()
             cur_set.card_set.add(new_card)
+            if card.rarity == 'Common':
+                pass
 
 
 def gen_set(set_id, set_obj):
@@ -86,3 +88,9 @@ def gen_set(set_id, set_obj):
             new_card.loyalty = card.loyalty
         new_card.save()
         set_obj.card_set.add(new_card)
+        if card.rarity == "Rare" or card.rarity == "Mythic Rare":
+            set_obj.rares.add(new_card)
+        if card.rarity == "Uncommon":
+            set_obj.uncommons.add(new_card)
+        if card.rarity == "Common":
+            set_obj.commons.add(new_card)
