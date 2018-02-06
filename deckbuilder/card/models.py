@@ -8,6 +8,8 @@ class Set(models.Model):
     """Class for set model."""
 
     name = models.CharField(max_length=50)
+    set_id = models.CharField(max_length=5, null=True, blank=True)
+    slug = models.SlugField(max_length=40, unique=True, blank=True, null=True)
 
     def __str__(self):
         """Change how model is displayed when printed."""
