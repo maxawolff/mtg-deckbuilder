@@ -37,7 +37,7 @@
               View Cards By Set
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              {% for mtg_set in object_list%}
+              {% for mtg_set in all_sets %}
               <a class="dropdown-item" href="{% url 'cards_by_set' slug=mtg_set.slug %}">{{ mtg_set.name }}</a>
               {% endfor %}
             </div>

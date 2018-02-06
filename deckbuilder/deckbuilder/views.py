@@ -13,6 +13,7 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         """."""
         context = super(HomeView, self).get_context_data(**kwargs)
-        # import pdb; pdb.set_trace()
+        all_sets = Set.objects.all()
+        context['all_sets'] = all_sets
         # import pdb; pdb.set_trace()
         return context
