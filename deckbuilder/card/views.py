@@ -58,3 +58,19 @@ class CardsBySet(DetailView):
         context['cards'] = cards_in_set
         # import pdb; pdb.set_trace()
         return context
+
+
+class GeneratePack(TemplateView):
+    """docstring for GeneratePack."""
+
+    template_name = 'cards/generate_pack.html'
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(GeneratePack, self).get_context_data(**kwargs)
+        all_sets = Set.objects.all()
+        context['all_sets'] = all_sets
+        cards_in_set = context['object'].card_set.all()
+        context['cards'] = cards_in_set
+        # import pdb; pdb.set_trace()
+        return context

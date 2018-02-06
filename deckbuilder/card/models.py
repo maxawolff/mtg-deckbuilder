@@ -44,8 +44,10 @@ class Card(models.Model):
     uncommons = models.ForeignKey(Set, on_delete=models.CASCADE,
                                   blank=True, null=True,
                                   related_name='uncommons')
-    Commons = models.ForeignKey(Set, on_delete=models.CASCADE,
+    commons = models.ForeignKey(Set, on_delete=models.CASCADE,
                                 blank=True, null=True, related_name='commons')
+    mythics = models.ForeignKey(Set, on_delete=models.CASCADE,
+                                blank=True, null=True, related_name='mythics')
 
     def _get_unique_slug(self):
         slug = slugify(self.name)
