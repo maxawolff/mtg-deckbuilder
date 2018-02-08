@@ -1,0 +1,7 @@
+{% extends "deckbuilder/base.html"%}
+
+{% block content %}
+    {% for card in pack %}
+    <a href="{% url 'card_detail' slug=card.slug %}"><img src="{{ card.image }}"></a>
+    {% endfor %}
+{% endblock %}
