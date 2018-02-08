@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic import CreateView
 from card.models import Card, Set
+from random import randint
 
 
 class TestAddView(TemplateView):
@@ -54,23 +55,38 @@ class CardsBySet(DetailView):
         context = super(CardsBySet, self).get_context_data(**kwargs)
         all_sets = Set.objects.all()
         context['all_sets'] = all_sets
+        import pdb; pdb.set_trace()
         cards_in_set = context['object'].card_set.all()
         context['cards'] = cards_in_set
-        # import pdb; pdb.set_trace()
         return context
 
 
-class GeneratePack(TemplateView):
+class GeneratePack(DetailView):
     """docstring for GeneratePack."""
 
-    template_name = 'cards/generate_pack.html'
+    template_name = 'deckbuilder/generate_pack.html'
+    model = Set
 
     def get_context_data(self, **kwargs):
         """."""
         context = super(GeneratePack, self).get_context_data(**kwargs)
         all_sets = Set.objects.all()
         context['all_sets'] = all_sets
-        cards_in_set = context['object'].card_set.all()
-        context['cards'] = cards_in_set
+        pack = []
+        commons = context['object'].commons.all()
+        uncommons = context['object'].uncommons.all()
+        rares = ''
+        rare_or_mythic = randint(1, 8)
+        if rare_or_mythic == 8:
+            rares = context['object'].mythics.all()
+        else:
+            rares = context['object'].rares.all()
+        for i in range(10):
+            pack.append(commons[randint(1, commons.count() - 1)])
+        for i in range(3):
+            pack.append(uncommons[randint(1, uncommons.count() - 1)])
+        for i in range(1):
+            pack.append(rares[randint(1, rares.count() - 1)])
+        context['pack'] = pack
         # import pdb; pdb.set_trace()
         return context
