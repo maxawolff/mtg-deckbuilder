@@ -23,8 +23,6 @@ class ListCards(ListView):
         context = super(ListCards, self).get_context_data(**kwargs)
         all_sets = Set.objects.all()
         context['all_sets'] = all_sets
-        # import pdb; pdb.set_trace()
-        # import pdb; pdb.set_trace()
         return context
 
 
@@ -39,8 +37,6 @@ class CardDetail(DetailView):
         context = super(CardDetail, self).get_context_data(**kwargs)
         all_sets = Set.objects.all()
         context['all_sets'] = all_sets
-        # import pdb; pdb.set_trace()
-        # import pdb; pdb.set_trace()
         return context
 
 
@@ -55,7 +51,6 @@ class CardsBySet(DetailView):
         context = super(CardsBySet, self).get_context_data(**kwargs)
         all_sets = Set.objects.all()
         context['all_sets'] = all_sets
-        import pdb; pdb.set_trace()
         cards_in_set = context['object'].card_set.all()
         context['cards'] = cards_in_set
         return context
@@ -90,5 +85,5 @@ class GeneratePack(DetailView):
             pack.append(uncommons[num])
         pack.append(rares[rare_num])
         context['pack'] = pack
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         return context
