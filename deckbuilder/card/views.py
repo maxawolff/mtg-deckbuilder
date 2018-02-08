@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic import CreateView
 from card.models import Card, Set
-from random import randint
+from random import randint, sample
 
 
 class TestAddView(TemplateView):
@@ -81,12 +81,14 @@ class GeneratePack(DetailView):
             rares = context['object'].mythics.all()
         else:
             rares = context['object'].rares.all()
-        for i in range(10):
-            pack.append(commons[randint(1, commons.count() - 1)])
-        for i in range(3):
-            pack.append(uncommons[randint(1, uncommons.count() - 1)])
-        for i in range(1):
-            pack.append(rares[randint(1, rares.count() - 1)])
+        common_nums = sample(range(commons.count()), 10)
+        uncommon_nums = sample(range(uncommons.count()), 3)
+        rare_num = randint(0, rares.count() - 1)
+        for num in common_nums:
+            pack.append(commons[num])
+        for num in uncommon_nums:
+            pack.append(uncommons[num])
+        pack.append(rares[rare_num])
         context['pack'] = pack
-        # import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
         return context
