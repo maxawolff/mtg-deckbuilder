@@ -99,3 +99,8 @@ def gen_set(set_id, set_obj):
             set_obj.commons.add(new_card)
         if card.rarity == "Mythic Rare":
             set_obj.mythics.add(new_card)
+        if 'b' in card.number:
+            possible_cards = Card.objects.filter(from_set=set_obj)
+            front_number = card.number[:-1] + 'a'
+            front_card = possible_cards.filter(number=front_number)[0]
+            front_card.back_side = new_card
