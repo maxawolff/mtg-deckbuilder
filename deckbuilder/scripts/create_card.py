@@ -1,3 +1,4 @@
+"""Test."""
 from mtgsdk import Card as SourceCard
 from mtgsdk import Set as sourceSet
 from card.models import Card, Set
@@ -78,7 +79,8 @@ def gen_set(set_id, set_obj):
                                        rarity=card.rarity,
                                        card_type=card.types,
                                        card_subtypes=card.subtypes,
-                                       card_text=card.text
+                                       card_text=card.text,
+                                       number=card.number
                                        )
         if card.power:
             new_card.power = card.power

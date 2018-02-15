@@ -38,6 +38,7 @@ class Card(models.Model):
     card_subtypes = models.CharField(max_length=50, blank=True, null=True)
     from_set = models.ForeignKey(Set, on_delete=models.CASCADE,
                                  blank=True, null=True)
+    number = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(max_length=40, unique=True, blank=True, null=True)
     rares = models.ForeignKey(Set, on_delete=models.CASCADE,
                               blank=True, null=True, related_name='rares')
