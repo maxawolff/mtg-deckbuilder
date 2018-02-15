@@ -70,14 +70,14 @@ class GeneratePack(DetailView):
         all_sets = Set.objects.all()
         context['all_sets'] = all_sets
         pack = []
-        commons = context['object'].commons.all()
-        uncommons = context['object'].uncommons.all()
+        commons = context['object'].commons.filter(in_pack=True)
+        uncommons = context['object'].uncommons.filter(in_pack=True)
         rares = ''
         rare_or_mythic = randint(1, 8)
         if rare_or_mythic == 8:
-            rares = context['object'].mythics.all()
+            rares = context['object'].mythics.filter(in_pack=True)
         else:
-            rares = context['object'].rares.all()
+            rares = context['object'].rares.filter(in_pack=True)
         common_nums = sample(range(commons.count()), 10)
         uncommon_nums = sample(range(uncommons.count()), 3)
         rare_num = randint(0, rares.count() - 1)
