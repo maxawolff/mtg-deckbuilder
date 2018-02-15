@@ -81,11 +81,11 @@ class GeneratePack(DetailView):
         common_nums = sample(range(commons.count()), 10)
         uncommon_nums = sample(range(uncommons.count()), 3)
         rare_num = randint(0, rares.count() - 1)
-        for num in common_nums:
-            pack.append(commons[num])
+        pack.append(rares[rare_num])
         for num in uncommon_nums:
             pack.append(uncommons[num])
-        pack.append(rares[rare_num])
+        for num in common_nums:
+            pack.append(commons[num])
         context['pack'] = pack
         # import pdb; pdb.set_trace()
         return context
