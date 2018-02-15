@@ -49,8 +49,10 @@ class Card(models.Model):
                                 blank=True, null=True, related_name='commons')
     mythics = models.ForeignKey(Set, on_delete=models.CASCADE,
                                 blank=True, null=True, related_name='mythics')
-    back_side = models.ForeignKey('self', on_delete=models.CASCADE,
-                                  blank=True, null=True)
+    back_side = models.OneToOneField('self', on_delete=models.CASCADE,
+                                     blank=True, null=True,
+                                     related_name='front_side')
+    in_pack = models.BooleanField()
 
     def _get_unique_slug(self):
         slug = slugify(self.name)

@@ -37,6 +37,8 @@ class CardDetail(DetailView):
         context = super(CardDetail, self).get_context_data(**kwargs)
         all_sets = Set.objects.all()
         context['all_sets'] = all_sets
+        # card = context['object']
+        # import pdb; pdb.set_trace()
         return context
 
 

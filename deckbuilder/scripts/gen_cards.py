@@ -81,7 +81,8 @@ def gen_set(set_id, set_obj):
                                        card_type=card.types,
                                        card_subtypes=card.subtypes,
                                        card_text=card.text,
-                                       number=card.number
+                                       number=card.number,
+                                       in_pack=True
                                        )
         if card.power:
             new_card.power = card.power
@@ -104,4 +105,7 @@ def gen_set(set_id, set_obj):
             front_number = card.number[:-1] + 'a'
             front_card = possible_cards.filter(number=front_number)[0]
             front_card.back_side = new_card
+            new_card.in_pack = False
             front_card.save()
+            new_card.save()
+            import pdb; pdb.set_trace()
