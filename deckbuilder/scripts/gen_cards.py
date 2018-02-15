@@ -104,3 +104,4 @@ def gen_set(set_id, set_obj):
             front_number = card.number[:-1] + 'a'
             front_card = possible_cards.filter(number=front_number)[0]
             front_card.back_side = new_card
+            front_card.save()
