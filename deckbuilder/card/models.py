@@ -74,6 +74,16 @@ class Card(models.Model):
         return self.name
 
 
+class Deck(models.model):
+    """Class for a deck model."""
+
+    FORMATS = (['ST', 'Standard'], ['SE', 'Sealed'], ['DR', 'Draft'])
+
+    name = models.CharField(max_length=50)
+    deck_format = models.CharField(max_length=50, choices=FORMATS)
+    card_list = models.ManyToManyField(Card)
+
+
 # class Transform(models.Model):
 #     """Model for the fliped side of a trasnform card."""
 

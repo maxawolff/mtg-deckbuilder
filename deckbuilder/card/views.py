@@ -87,5 +87,4 @@ class GeneratePack(DetailView):
         for num in common_nums:
             pack.append(commons[num])
         context['pack'] = pack
-        # import pdb; pdb.set_trace()
         return context
