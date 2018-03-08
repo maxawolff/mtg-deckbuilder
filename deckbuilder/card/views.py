@@ -1,7 +1,5 @@
 """Views for cards, as well as generating from sdk."""
-from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
-from django.views.generic import CreateView
 from card.models import Card, Set
 from random import randint, sample
 
@@ -88,3 +86,7 @@ class GeneratePack(DetailView):
             pack.append(commons[num])
         context['pack'] = pack
         return context
+
+
+class CreateSealedDeck(ListView):
+    """View for creating a sealed deck."""
