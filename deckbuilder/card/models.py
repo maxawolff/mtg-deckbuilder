@@ -34,6 +34,7 @@ class Card(models.Model):
     power = models.CharField(max_length=5, null=True, blank=True)
     toughness = models.CharField(max_length=5, null=True, blank=True)
     rarity = models.CharField(max_length=20, choices=RARITIES)
+    number = models.CharField(max_length=10)
     card_text = models.CharField(max_length=600, blank=True, null=True)
     card_type = models.CharField(max_length=50)
     card_subtypes = models.CharField(max_length=50, blank=True, null=True)
@@ -53,7 +54,7 @@ class Card(models.Model):
     back_side = models.OneToOneField('self', on_delete=models.CASCADE,
                                      blank=True, null=True,
                                      related_name='front_side')
-    in_pack = models.BooleanField()
+    in_pack = models.BooleanField(default=True)
 
     def _get_unique_slug(self):
         slug = slugify(self.name)
