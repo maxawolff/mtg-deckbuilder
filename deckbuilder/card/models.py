@@ -10,9 +10,7 @@ class Set(models.Model):
     name = models.CharField(max_length=50)
     set_id = models.CharField(max_length=5, null=True, blank=True)
     slug = models.SlugField(max_length=40, unique=True, blank=True, null=True)
-    sealed_format = models.ManyToManyField('self', on_delete=models.CASCADE,
-                                           blank=True, null=True,
-                                           related_name='change this name')
+    sealed_format = models.ManyToManyField('self')
 
     def __str__(self):
         """Change how model is displayed when printed."""
@@ -77,7 +75,7 @@ class Card(models.Model):
         return self.name
 
 
-class Deck(models.model):
+class Deck(models.Model):
     """Class for a deck model."""
 
     FORMATS = (['ST', 'Standard'], ['SE', 'Sealed'], ['DR', 'Draft'])
