@@ -108,4 +108,3 @@ def gen_set(set_id, set_obj):
             new_card.in_pack = False
             front_card.save()
             new_card.save()
-            import pdb; pdb.set_trace()

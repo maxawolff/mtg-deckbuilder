@@ -4,6 +4,28 @@ from card.models import Card, Set
 from random import randint, sample
 
 
+def gen_pack(format):
+    """Generate a pack from a given format, return as list of cards."""
+    pack = []
+    commons = format.commons.filter(in_pack=True)
+    uncommons = format.uncommons.filter(in_pack=True)
+    rares = ''
+    rare_or_mythic = randint(1, 8)
+    if rare_or_mythic == 8:
+        rares = format.mythics.filter(in_pack=True)
+    else:
+        rares = format.rares.filter(in_pack=True)
+    common_nums = sample(range(commons.count()), 10)
+    uncommon_nums = sample(range(uncommons.count()), 3)
+    rare_num = randint(0, rares.count() - 1)
+    pack.append(rares[rare_num])
+    for num in uncommon_nums:
+        pack.append(uncommons[num])
+    for num in common_nums:
+        pack.append(commons[num])
+    return pack
+
+
 class TestAddView(TemplateView):
     """Add one card to the database."""
 
