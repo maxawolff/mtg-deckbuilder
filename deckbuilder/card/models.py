@@ -12,11 +12,13 @@ class Set(models.Model):
     slug = models.SlugField(max_length=40, unique=True, blank=True, null=True)
     # sealed_format = models.ManyToManyField('self')
     big_set = models.ForeignKey('self', on_delete=models.CASCADE,
-                                blank=True, null=True)
+                                blank=True, null=True, related_name='big_sets')
     small_set = models.ForeignKey('self', on_delete=models.CASCADE,
-                                  blank=True, null=True)
+                                  blank=True, null=True,
+                                  related_name='small_sets')
     third_set = models.ForeignKey('self', on_delete=models.CASCADE,
-                                  blank=True, null=True)
+                                  blank=True, null=True,
+                                  related_name='third_sets')
 
     def __str__(self):
         """Change how model is displayed when printed."""
