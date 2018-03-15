@@ -11,5 +11,6 @@ urlpatterns = [
     path('card/<slug:slug>/', CardDetail.as_view(), name='card_detail'),
     path('set/<slug:slug>/', CardsBySet.as_view(), name='cards_by_set'),
     path('pack/<slug:slug>/', GeneratePack.as_view(), name='generate_pack'),
-    path('create-sealed-deck/', CreateSealedDeck.as_view(), name='create_sealed')
+    path('create-sealed-deck/<slug:slug>/', CreateSealedDeck.as_view(),
+         name='create_sealed'),
 ]

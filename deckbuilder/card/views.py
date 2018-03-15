@@ -94,5 +94,27 @@ class GeneratePack(DetailView):
         return context
 
 
-class CreateSealedDeck(ListView):
+class CreateSealedDeck(DetailView):
     """View for creating a sealed deck."""
+
+    template_name = 'deckbuilder/generate_sealed.html'
+    model = Set
+
+    def get_context_data(self, **kwargs):
+        """."""
+        context = super(CreateSealedDeck, self).get_context_data(**kwargs)
+        all_sets = Set.objects.all()
+        context['all_sets'] = all_sets
+        sealed_format = context['object']
+        sealed_pool = []
+        if sealed_format.third_set:
+            pass
+        elif sealed_format.small_set:
+            for i in range(0, 4):
+                sealed_pool.append(gen_pack(sealed_format.big_set))
+            for i in range(0, 2):
+                sealed_pool.append(gen_pack(sealed_format.small_set))
+        else:
+            pass
+        context['pool'] = sealed_pool
+        return context
