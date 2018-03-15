@@ -1,3 +1,4 @@
+"""Test."""
 from mtgsdk import Card as SourceCard
 from mtgsdk import Set as sourceSet
 from card.models import Card, Set
@@ -51,7 +52,8 @@ def run(*args):
                                            rarity=card.rarity,
                                            card_type=card.types,
                                            card_subtypes=card.subtypes,
-                                           card_text=card.text
+                                           card_text=card.text,
+                                           number=card.number
                                            )
             if card.power:
                 new_card.power = card.power
@@ -78,7 +80,9 @@ def gen_set(set_id, set_obj):
                                        rarity=card.rarity,
                                        card_type=card.types,
                                        card_subtypes=card.subtypes,
-                                       card_text=card.text
+                                       card_text=card.text,
+                                       number=card.number,
+                                       in_pack=True
                                        )
         if card.power:
             new_card.power = card.power
@@ -96,3 +100,11 @@ def gen_set(set_id, set_obj):
             set_obj.commons.add(new_card)
         if card.rarity == "Mythic Rare":
             set_obj.mythics.add(new_card)
+        if 'b' in card.number:
+            possible_cards = Card.objects.filter(from_set=set_obj)
+            front_number = card.number[:-1] + 'a'
+            front_card = possible_cards.filter(number=front_number)[0]
+            front_card.back_side = new_card
+            new_card.in_pack = False
+            front_card.save()
+            new_card.save()

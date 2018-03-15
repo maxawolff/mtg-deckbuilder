@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from deckbuilder.views import HomeView
-from card.views import ListCards, CardDetail, CardsBySet, GeneratePack
+from card.views import ListCards, CardDetail, CardsBySet, GeneratePack, CreateSealedDeck
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -10,5 +10,7 @@ urlpatterns = [
     path('all-cards', ListCards.as_view(), name='all_cards'),
     path('card/<slug:slug>/', CardDetail.as_view(), name='card_detail'),
     path('set/<slug:slug>/', CardsBySet.as_view(), name='cards_by_set'),
-    path('pack/<slug:slug>/', GeneratePack.as_view(), name='generate_pack')
+    path('pack/<slug:slug>/', GeneratePack.as_view(), name='generate_pack'),
+    path('create-sealed-deck/<slug:slug>/', CreateSealedDeck.as_view(),
+         name='create_sealed'),
 ]
