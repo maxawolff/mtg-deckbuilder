@@ -89,23 +89,7 @@ class GeneratePack(DetailView):
         context = super(GeneratePack, self).get_context_data(**kwargs)
         all_sets = Set.objects.all()
         context['all_sets'] = all_sets
-        pack = []
-        commons = context['object'].commons.filter(in_pack=True)
-        uncommons = context['object'].uncommons.filter(in_pack=True)
-        rares = ''
-        rare_or_mythic = randint(1, 8)
-        if rare_or_mythic == 8:
-            rares = context['object'].mythics.filter(in_pack=True)
-        else:
-            rares = context['object'].rares.filter(in_pack=True)
-        common_nums = sample(range(commons.count()), 10)
-        uncommon_nums = sample(range(uncommons.count()), 3)
-        rare_num = randint(0, rares.count() - 1)
-        pack.append(rares[rare_num])
-        for num in uncommon_nums:
-            pack.append(uncommons[num])
-        for num in common_nums:
-            pack.append(commons[num])
+        pack = gen_pack(context['object'])
         context['pack'] = pack
         return context
 
